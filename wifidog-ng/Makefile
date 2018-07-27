@@ -34,7 +34,7 @@ define Package/wifidog-ng-nossl
   TITLE += (NO SSL)
   DEPENDS += +libuhttpd-nossl
   VARIANT:=nossl
-  CONFLICTS:=wifidog-ng-openssl wifidog-ng-cyassl wifidog-ng-polarssl
+  CONFLICTS:=wifidog-ng-openssl wifidog-ng-wolfssl wifidog-ng-mbedtls
 endef
 
 define Package/wifidog-ng-openssl
@@ -42,22 +42,22 @@ define Package/wifidog-ng-openssl
   TITLE += (openssl)
   DEPENDS += +libuhttpd-openssl
   VARIANT:=openssl
-  CONFLICTS:=wifidog-ng-cyassl wifidog-ng-polarssl
+  CONFLICTS:=wifidog-ng-wolfssl wifidog-ng-mbedtls
 endef
 
-define Package/wifidog-ng-cyassl
+define Package/wifidog-ng-wolfssl
   $(Package/wifidog-ng/default)
-  TITLE += (cyassl)
-  DEPENDS += +libuhttpd-cyassl
-  VARIANT:=cyassl
-  CONFLICTS:=wifidog-ng-polarssl
+  TITLE += (wolfssl)
+  DEPENDS += +libuhttpd-wolfssl
+  VARIANT:=wolfssl
+  CONFLICTS:=wifidog-ng-mbedtls
 endef
 
-define Package/wifidog-ng-polarssl
+define Package/wifidog-ng-mbedtls
   $(Package/wifidog-ng/default)
-  TITLE += (polarssl)
-  DEPENDS += +libuhttpd-polarssl
-  VARIANT:=polarssl
+  TITLE += (mbedtls)
+  DEPENDS += +libuhttpd-mbedtls
+  VARIANT:=mbedtls
 endef
 
 define Package/wifidog-ng/default/install
@@ -74,8 +74,8 @@ endef
 
 Package/wifidog-ng-nossl/install = $(Package/wifidog-ng/default/install)
 Package/wifidog-ng-openssl/install = $(Package/wifidog-ng/default/install)
-Package/wifidog-ng-cyassl/install = $(Package/wifidog-ng/default/install)
-Package/wifidog-ng-polarssl/install = $(Package/wifidog-ng/default/install)
+Package/wifidog-ng-wolfssl/install = $(Package/wifidog-ng/default/install)
+Package/wifidog-ng-mbedtls/install = $(Package/wifidog-ng/default/install)
 
 include $(INCLUDE_DIR)/kernel.mk
 
@@ -93,8 +93,8 @@ define Build/Compile
 endef
 
 $(eval $(call BuildPackage,wifidog-ng-nossl))
-$(eval $(call BuildPackage,wifidog-ng-polarssl))
-$(eval $(call BuildPackage,wifidog-ng-cyassl))
+$(eval $(call BuildPackage,wifidog-ng-mbedtls))
+$(eval $(call BuildPackage,wifidog-ng-wolfssl))
 $(eval $(call BuildPackage,wifidog-ng-openssl))
 
 $(eval $(call KernelPackage,wifidog-ng))

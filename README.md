@@ -1,6 +1,6 @@
 # Add feeds
     
-    echo 'src-git wifidog_ng https://github.com/zhaojh329/wifidog-ng.git;openwrt-lede' >> feeds.conf.default
+    echo 'src-git wifidog_ng https://github.com/zhaojh329/wifidog-ng.git;openwrt-18' >> feeds.conf.default
 
 # Update feeds
 
@@ -16,4 +16,4 @@
             <*> wifidog-ng-mbedtls............................ Next generation WifiDog implemented in Lua (mbedtls)
             < > wifidog-ng-nossl............................... Next generation WifiDog implemented in Lua (NO SSL)
             < > wifidog-ng-openssl............................ Next generation WifiDog implemented in Lua (openssl)
-            < > wifidog-ng-cyassl............................ Next generation WifiDog implemented in Lua (cyassl)
+            < > wifidog-ng-wolfssl............................ Next generation WifiDog implemented in Lua (wolfssl)

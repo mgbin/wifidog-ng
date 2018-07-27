@@ -8,14 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libuhttpd
-PKG_VERSION:=2.2.1
+PKG_VERSION:=2.2.0
 PKG_RELEASE:=2
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_VERSION:=v$(PKG_VERSION)
 PKG_SOURCE_URL=https://github.com/zhaojh329/libuhttpd.git
+PKG_MIRROR_HASH:=676cd42e33df218020931a72c3558fc1fe89e6c38aa6b722214c69e2d2315219
 CMAKE_INSTALL:=1
 
 PKG_BUILD_DIR=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_SOURCE_SUBDIR)
@@ -40,7 +39,7 @@ define Package/libuhttpd-nossl
   $(Package/libuhttpd/default)
   TITLE += (NO SSL)
   VARIANT:=nossl
-  CONFLICTS:=libuhttpd-openssl libuhttpd-cyassl libuhttpd-mbedtls
+  CONFLICTS:=libuhttpd-openssl libuhttpd-wolfssl libuhttpd-mbedtls
 endef
 
 define Package/libuhttpd-openssl
@@ -48,14 +47,14 @@ define Package/libuhttpd-openssl
   TITLE += (openssl)
   DEPENDS += +libustream-openssl
   VARIANT:=openssl
-  CONFLICTS:=libuhttpd-cyassl libuhttpd-mbedtls
+  CONFLICTS:=libuhttpd-wolfssl libuhttpd-mbedtls
 endef
 
-define Package/libuhttpd-cyassl
+define Package/libuhttpd-wolfssl
   $(Package/libuhttpd/default)
-  TITLE += (cyassl)
-  DEPENDS += +libustream-cyassl
-  VARIANT:=cyassl
+  TITLE += (wolfssl)
+  DEPENDS += +libustream-wolfssl
+  VARIANT:=wolfssl
   CONFLICTS:=libuhttpd-mbedtls
 endef
 
@@ -78,10 +77,10 @@ endef
 
 Package/libuhttpd-nossl/install = $(Package/libuhttpd/default/install)
 Package/libuhttpd-openssl/install = $(Package/libuhttpd/default/install)
-Package/libuhttpd-cyassl/install = $(Package/libuhttpd/default/install)
+Package/libuhttpd-wolfssl/install = $(Package/libuhttpd/default/install)
 Package/libuhttpd-mbedtls/install = $(Package/libuhttpd/default/install)
 
 $(eval $(call BuildPackage,libuhttpd-nossl))
 $(eval $(call BuildPackage,libuhttpd-mbedtls))
-$(eval $(call BuildPackage,libuhttpd-cyassl))
+$(eval $(call BuildPackage,libuhttpd-wolfssl))
 $(eval $(call BuildPackage,libuhttpd-openssl))
