@@ -1,6 +1,6 @@
 # Add feeds
     
-    echo 'src-git wifidog_ng https://github.com/zhaojh329/wifidog-ng.git;openwrt-14.04' >> feeds.conf.default
+    echo 'src-git wifidog_ng https://github.com/zhaojh329/wifidog-ng.git;openwrt-15.05' >> feeds.conf.default
 
 # Update feeds
 
