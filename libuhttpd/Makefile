@@ -40,7 +40,7 @@ define Package/libuhttpd-nossl
   $(Package/libuhttpd/default)
   TITLE += (NO SSL)
   VARIANT:=nossl
-  CONFLICTS:=libuhttpd-openssl libuhttpd-cyassl libuhttpd-polarssl
+  CONFLICTS:=libuhttpd-openssl libuhttpd-cyassl libuhttpd-mbedtls
 endef
 
 define Package/libuhttpd-openssl
@@ -48,7 +48,7 @@ define Package/libuhttpd-openssl
   TITLE += (openssl)
   DEPENDS += +libustream-openssl
   VARIANT:=openssl
-  CONFLICTS:=libuhttpd-cyassl libuhttpd-polarssl
+  CONFLICTS:=libuhttpd-cyassl libuhttpd-mbedtls
 endef
 
 define Package/libuhttpd-cyassl
@@ -56,14 +56,14 @@ define Package/libuhttpd-cyassl
   TITLE += (cyassl)
   DEPENDS += +libustream-cyassl
   VARIANT:=cyassl
-  CONFLICTS:=libuhttpd-polarssl
+  CONFLICTS:=libuhttpd-mbedtls
 endef
 
-define Package/libuhttpd-polarssl
+define Package/libuhttpd-mbedtls
   $(Package/libuhttpd/default)
-  TITLE += (polarssl)
-  DEPENDS += +libustream-polarssl
-  VARIANT:=polarssl
+  TITLE += (mbedtls)
+  DEPENDS += +libustream-mbedtls
+  VARIANT:=mbedtls
 endef
 
 ifeq ($(BUILD_VARIANT),nossl)
@@ -79,9 +79,9 @@ endef
 Package/libuhttpd-nossl/install = $(Package/libuhttpd/default/install)
 Package/libuhttpd-openssl/install = $(Package/libuhttpd/default/install)
 Package/libuhttpd-cyassl/install = $(Package/libuhttpd/default/install)
-Package/libuhttpd-polarssl/install = $(Package/libuhttpd/default/install)
+Package/libuhttpd-mbedtls/install = $(Package/libuhttpd/default/install)
 
 $(eval $(call BuildPackage,libuhttpd-nossl))
-$(eval $(call BuildPackage,libuhttpd-polarssl))
+$(eval $(call BuildPackage,libuhttpd-mbedtls))
 $(eval $(call BuildPackage,libuhttpd-cyassl))
 $(eval $(call BuildPackage,libuhttpd-openssl))
